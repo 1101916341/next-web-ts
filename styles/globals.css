@@ -1,0 +1,7 @@
+@import "antd/dist/reset.css";
+
+.ant-btn,
+div.ant-modal .ant-modal-content,
+.ant-input {
+  border-radius: 2px;
+}

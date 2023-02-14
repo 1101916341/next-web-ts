@@ -1,0 +1,31 @@
+.login .ant-modal-header {
+  margin-bottom: 16px;
+}
+
+.login .ant-modal-title {
+  font-size: 20px;
+}
+
+.login div.get-code {
+  position: relative;
+}
+
+.login div.get-code button.ant-btn-link {
+  position: absolute;
+  display: inline-block;
+  right: 0;
+  top: 0;
+  padding-left: 0;
+}
+
+.login .ant-btn-block {
+  margin-bottom: 16px;
+}
+
+.login .btn-text .ant-btn-link {
+  padding: 0;
+}
+
+.login .login-text {
+  display: block;
+}
