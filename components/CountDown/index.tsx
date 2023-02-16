@@ -16,8 +16,19 @@ const CountDown: NextPage<Props> = (props) => {
 
   const handleGetCode = () => {
     if (form.getFieldValue("phone")) {
-      request.post("/api/user/sendCode");
-      setHasShowCode(true);
+      request
+        .post("/api/user/sendCode", {
+          to: form.getFieldValue("phone"),
+          templateId: 1
+        })
+        .then((response) => {
+          if (response?.status === 200) {
+            console.log(response);
+            setHasShowCode(true);
+          } else {
+            message.error(response?.statusText || "未知错误");
+          }
+        });
     } else {
       message.warning({
         content: "请输入手机号"
