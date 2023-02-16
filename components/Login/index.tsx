@@ -1,18 +1,19 @@
 import type { NextPage } from "next";
 import React from "react";
 import { Form, Input, Modal, Button } from "antd";
+import CountDown from "components/CountDown";
 
 interface Props {
   isOpen: boolean;
   onClose: Function;
 }
-// const { Option } = Select;
 const Login: NextPage<Props> = (props) => {
   const { isOpen, onClose } = props;
 
   const handleFinish = (value: any) => {
     console.log("登录", value);
   };
+
   return (
     <Modal
       destroyOnClose={true}
@@ -32,7 +33,7 @@ const Login: NextPage<Props> = (props) => {
           <Form.Item name='code'>
             <Input placeholder='请输入验证码' />
           </Form.Item>
-          <Button type='link'>获取验证码</Button>
+          <CountDown time={10} />
         </div>
         <Button type='primary' htmlType='submit' block>
           登录
