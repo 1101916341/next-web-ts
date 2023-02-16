@@ -8,10 +8,16 @@ interface Props {
   onClose: Function;
 }
 const Login: NextPage<Props> = (props) => {
+  const [form] = Form.useForm();
   const { isOpen, onClose } = props;
 
   const handleFinish = (value: any) => {
     console.log("登录", value);
+  };
+
+  const handleCloseModal = () => {
+    form.resetFields();
+    onClose();
   };
 
   return (
@@ -22,10 +28,10 @@ const Login: NextPage<Props> = (props) => {
       title='手机号登录'
       width={340}
       centered
-      onCancel={() => onClose()}
+      onCancel={handleCloseModal}
       maskClosable={false}
       footer={null}>
-      <Form onFinish={handleFinish}>
+      <Form onFinish={handleFinish} form={form}>
         <Form.Item name='phone'>
           <Input placeholder='请输入手机号' />
         </Form.Item>
@@ -33,7 +39,7 @@ const Login: NextPage<Props> = (props) => {
           <Form.Item name='code'>
             <Input placeholder='请输入验证码' />
           </Form.Item>
-          <CountDown time={10} />
+          <CountDown time={10} form={form} />
         </div>
         <Button type='primary' htmlType='submit' block>
           登录

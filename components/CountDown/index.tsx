@@ -1,19 +1,28 @@
 import type { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "antd";
+import { Button, FormInstance, message } from "antd";
+import request from "service/fetch";
 
 interface Props {
   time: number;
+  form: FormInstance;
 }
 
 const CountDown: NextPage<Props> = (props) => {
-  const { time } = props;
+  const { time, form } = props;
   const [count, setCount] = useState<number>(time);
   const [hasShowCode, setHasShowCode] = useState<boolean>(false);
   const timeRef = useRef<ReturnType<any>>(null);
 
   const handleGetCode = () => {
-    setHasShowCode(true);
+    if (form.getFieldValue("phone")) {
+      request.post("/api/user/sendCode");
+      setHasShowCode(true);
+    } else {
+      message.warning({
+        content: "请输入手机号"
+      });
+    }
   };
 
   useEffect(() => {

@@ -2,6 +2,7 @@
 
 .ant-btn,
 div.ant-modal .ant-modal-content,
-.ant-input {
+.ant-input,
+div.ant-message-notice .ant-message-notice-content {
   border-radius: 2px;
 }
