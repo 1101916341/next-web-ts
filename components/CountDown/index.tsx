@@ -21,12 +21,11 @@ const CountDown: NextPage<Props> = (props) => {
           to: form.getFieldValue("phone"),
           templateId: 1
         })
-        .then((response) => {
-          if (response?.status === 200) {
-            console.log(response);
+        .then((response: any) => {
+          if (response?.code === 200) {
             setHasShowCode(true);
           } else {
-            message.error(response?.statusText || "未知错误");
+            message.error(response?.msg || "未知错误");
           }
         });
     } else {

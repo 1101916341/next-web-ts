@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import React from "react";
-import { Form, Input, Modal, Button } from "antd";
+import { Form, Input, Modal, Button, message } from "antd";
 import CountDown from "components/CountDown";
+import request from "service/fetch";
 
 interface Props {
   isOpen: boolean;
@@ -12,7 +13,20 @@ const Login: NextPage<Props> = (props) => {
   const { isOpen, onClose } = props;
 
   const handleFinish = (value: any) => {
-    console.log("登录", value);
+    if (!value.phone) {
+      message.warning("手机号不能为空");
+    } else if (!value.code) {
+      message.warning("验证码不能为空");
+    } else {
+      if (value.code === "") {
+        request("/api/user/login", value).then((res) => {
+          console.log(res);
+        });
+        console.log(value);
+      } else {
+        message.warning("验证码不正确，请重新输入");
+      }
+    }
   };
 
   const handleCloseModal = () => {
