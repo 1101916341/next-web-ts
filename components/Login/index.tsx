@@ -15,12 +15,16 @@ const Login: NextPage<Props> = (props) => {
   const handleFinish = (value: any) => {
     if (!value.phone) {
       message.warning("手机号不能为空");
-    } else if (!value.code) {
+    } else if (!value.verifyCode) {
       message.warning("验证码不能为空");
     } else {
-      if (value.code === "") {
-        request("/api/user/login", value).then((res) => {
-          console.log(res);
+      if (value.verifyCode === "") {
+        request.post("/api/user/login", value).then((res: any) => {
+          if (res?.code === 200) {
+            onClose && onClose();
+          } else {
+            message.error(res?.msg || "未知错误");
+          }
         });
         console.log(value);
       } else {
@@ -50,7 +54,7 @@ const Login: NextPage<Props> = (props) => {
           <Input placeholder='请输入手机号' />
         </Form.Item>
         <div className='get-code'>
-          <Form.Item name='code'>
+          <Form.Item name='verifyCode'>
             <Input placeholder='请输入验证码' />
           </Form.Item>
           <CountDown time={10} form={form} />
